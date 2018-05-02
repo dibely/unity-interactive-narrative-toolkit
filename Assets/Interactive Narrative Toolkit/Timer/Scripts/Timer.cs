@@ -24,9 +24,8 @@ namespace InteractiveNarrativeToolkit {
                 timer += Time.deltaTime;
 
                 if (timer >= waitTime) {
-                    // Perform action
+                    StopTimer();
                     OnTimerComplete();
-                    ResetTimer();
                 }
             }
         }
