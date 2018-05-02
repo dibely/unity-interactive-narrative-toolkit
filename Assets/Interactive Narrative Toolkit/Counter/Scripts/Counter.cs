@@ -1,52 +1,52 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 namespace InteractiveNarrativeToolkit {
     //
     // Summary:
     //     ///
-    //     Increments a counter with each incoming activation message. 
-    //     Once the required count has been reached it will send out an activation message to a linked object.
+    //     Simple counter that can be incremented, decremented and reset. 
+    //     Once the counter reaches a specified target it will send out messages to any linked objects.
     //     ///
-    public class Counter : MonoBehaviour, ITriggerable {
-        [Tooltip("An object that will be sent an activate message once the target count has been reached.")]
-        public GameObject target;
-
-        [Tooltip("The count value between 1 and 100 to reach before sending a message to the target object.")]
-        [Range(1, 100)]
+    public class Counter : MonoBehaviour {
+        [Tooltip("The counter value to reach before it is considered complete.")]
+        [Range(1, 999)]
         public int targetCount = 1;
         private int counter = 0;
 
-        // Use this for initialization
-        void Start() { }
+        [Tooltip("Completion event messages to send once the target count has been reached.")]
+        public UnityEvent counterCompletionEvents;
 
-        // Update is called once per frame
-        void Update() { }
+        #region Control methods
 
-        // ITriggerable methods
-
-        public void Activate() {
+        public void IncrementCounter() {
             counter++;
             CheckTargetCountReached();
         }
 
-        public void Deactivate() {
-            // TODO: Decrement counter?
+        public void DecrementCounter() {
+            counter--;
+
+            // Limit the counter to the original starting value
+            if(counter < 0) {
+                counter = 0;
+            }
         }
+
+        public void ResetCounter() {
+            counter = 0;
+        }
+
+        #endregion
 
         private void CheckTargetCountReached() {
             if (counter == targetCount) {
-                Debug.Log("Target count reached");
-
-                if (target != null) {
-                    // Send a message to the target object.
-                    Debug.Log("Sending activate message to " + target.name);
-                    ExecuteEvents.Execute<ITriggerable>(target, null, (x, y) => x.Activate());
-                }
-                else {
-                    Debug.LogError("Invalid target specific");
-                }
+                OnCounterComplete();
             }
+        }
+
+        private void OnCounterComplete() {
+            counterCompletionEvents.Invoke();
         }
     }
 }
