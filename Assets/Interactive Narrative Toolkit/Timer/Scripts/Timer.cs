@@ -12,6 +12,11 @@ namespace InteractiveNarrativeToolkit {
         [Tooltip("The time in seconds to wait before the timer is considered complete.")]
         public float waitTime = 10.0f;
         private float timer = 0.0f;
+        public float CurrentTime {
+            get {
+                return timer;
+            }
+        }
 
         [Tooltip("Active state of the timer.")]
         public bool active = false;
