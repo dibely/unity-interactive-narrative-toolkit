@@ -13,6 +13,11 @@ namespace InteractiveNarrativeToolkit {
         [Range(1, 999)]
         public int targetCount = 1;
         private int counter = 0;
+        public int CurrentCount {
+            get {
+                return counter;
+            }
+        }
 
         [Tooltip("Completion event messages to send once the target count has been reached.")]
         public UnityEvent counterCompletionEvents;
