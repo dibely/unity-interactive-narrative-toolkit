@@ -4,4 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Examples/Additive Scenes/first_scene.unity
+    guid: ee1dd75c4f09cc743bc5ba6f542a3d27
+  - enabled: 1
+    path: Assets/Examples/Additive Scenes/scene_a.unity
+    guid: f103ed31ed24be048bd9e023cedb4440
+  - enabled: 1
+    path: Assets/Examples/Additive Scenes/scene_b.unity
+    guid: 0b72bcc08be541f45b88fd0a773e5ac8
+  - enabled: 1
+    path: Assets/Examples/Additive Scenes/scene_c.unity
+    guid: 71b7c1e067dcb894aaff21a86a0fd45d
